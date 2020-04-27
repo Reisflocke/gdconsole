@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://addons/GDConsole/Console.gd" type="Script" id=1]
+[ext_resource path="res://addons/GDConsole/Commands/Misc/force_quit.gd" type="Script" id=2]
+[ext_resource path="res://addons/GDConsole/Commands/Console/clear_history.gd" type="Script" id=3]
+[ext_resource path="res://addons/GDConsole/Command Handler.gd" type="Script" id=4]
+[ext_resource path="res://addons/GDConsole/Commands/Console/clear.gd" type="Script" id=5]
+[ext_resource path="res://addons/GDConsole/Commands/Console/cls.gd" type="Script" id=6]
+[ext_resource path="res://addons/GDConsole/Commands/Console/help.gd" type="Script" id=7]
+[ext_resource path="res://addons/GDConsole/Commands/Game/window_resolution.gd" type="Script" id=8]
+[ext_resource path="res://addons/GDConsole/Commands/Game/window_size.gd" type="Script" id=9]
+[ext_resource path="res://addons/GDConsole/Commands/Game/toggle_fullscreen.gd" type="Script" id=10]
+
+[node name="Console" type="Panel"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Output" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -56.0
+focus_mode = 2
+bbcode_enabled = true
+bbcode_text = "[center]---------- CONSOLE OUTPUT: ----------[/center]"
+text = "---------- CONSOLE OUTPUT: ----------"
+scroll_following = true
+selection_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Input" type="LineEdit" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = -40.0
+margin_right = -16.0
+margin_bottom = -16.0
+focus_neighbour_top = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+placeholder_text = "Enter command ... (type help to list all avaible commands)"
+placeholder_alpha = 0.4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Command Handler" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="Console" type="Node" parent="Command Handler"]
+
+[node name="cls" type="Node" parent="Command Handler/Console"]
+script = ExtResource( 6 )
+
+[node name="clear" type="Node" parent="Command Handler/Console"]
+script = ExtResource( 5 )
+
+[node name="clear_history" type="Node" parent="Command Handler/Console"]
+script = ExtResource( 3 )
+
+[node name="help" type="Node" parent="Command Handler/Console"]
+script = ExtResource( 7 )
+
+[node name="Game" type="Node" parent="Command Handler"]
+
+[node name="toggle_fullscreen" type="Node" parent="Command Handler/Game"]
+script = ExtResource( 10 )
+
+[node name="window_size" type="Node" parent="Command Handler/Game"]
+script = ExtResource( 9 )
+
+[node name="window_resolution" type="Node" parent="Command Handler/Game"]
+script = ExtResource( 8 )
+
+[node name="Misc" type="Node" parent="Command Handler"]
+
+[node name="force_quit" type="Node" parent="Command Handler/Misc"]
+script = ExtResource( 2 )
+[connection signal="text_entered" from="Input" to="." method="_on_Input_text_entered"]
