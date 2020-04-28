@@ -1,6 +1,8 @@
 # gdconsole
 A free and open source, easy to use ingame (debug)-console for the Godot Engine
 
+![Console Window Screenshot](./screenshots/consolewindow.png)
+
 **Read the DOCUMENTATION.md file in addons/GDConsole to find out how to use the Console**
 
 You can just drag and drop this addon into your project. It has everything a ingame console needs and is easily costumizeable. It comes with a predefined set of commands which are a exsample for you to understand how to create your own one.
